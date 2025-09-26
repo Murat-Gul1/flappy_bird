@@ -17,6 +17,7 @@ let birdY = canvas.height / 2;
 let birdVy = 0;
 const gravity = 0.5;
 const birdImg = new Image();
+let started = false;
 birdImg.src = "bird.png";
 birdImg.onload = function() {
     ctx.drawImage(birdImg,80,canvas.height/2-12,36,36);
@@ -28,7 +29,7 @@ function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
 
 function loop() {
     
-if (!gameOver) {
+if (!gameOver && started) {
   birdVy += gravity;
   birdY  += birdVy;
 
@@ -91,16 +92,29 @@ ctx.fillText('Skor: ' + score, 10, 30);
   ctx.fillText('R: restart', canvas.width / 2, canvas.height / 2 + 28);
   ctx.textAlign = 'start';
 }
+if (!started) {
+  ctx.fillStyle = 'black';
+  ctx.font = '20px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Space to get started', canvas.width/2, canvas.height/2);
+  ctx.textAlign = 'start';
+}
+
   
     requestAnimationFrame(loop);
 
 }
 loop();
 window.addEventListener("keydown",(e)=>{
-    if(e.code==="Space"){ 
-        e.preventDefault();
-        birdVy = jumpStrength;
-    }
+if (e.code === 'Space') {
+  e.preventDefault();
+  if (!started) {
+    started = true;   
+  } else if (!gameOver) {
+    birdVy = jumpStrength; 
+  }
+}
+
 if (e.code === 'KeyR') {
   birdY = canvas.height / 2;
   birdVy = 0;
