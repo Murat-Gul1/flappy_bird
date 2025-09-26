@@ -26,21 +26,18 @@ function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
   return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
 }
 
-//fiziğin olduğu yer
 function loop() {
     
 if (!gameOver) {
   birdVy += gravity;
   birdY  += birdVy;
 
-  // zemin
   if (birdY + 36 > canvas.height - groundH) {
     birdY = canvas.height - groundH - 36;
     birdVy = 0;
     gameOver = true;
   }
 
-  // boru hareketi
   pipeX -= pipeSpeed;
   if (pipeX + pipeW < 0) {
     pipeX = canvas.width + 20;
@@ -48,9 +45,7 @@ if (!gameOver) {
     passed = false;
   }
 
-  // üst sınır
   if (birdY < 0) { birdY = 0; birdVy = 0; }
-  // Kuş boruyu geçti mi? (kuşun x'i ~80)
 if (!passed && pipeX + pipeW < 80) {
   score+=10 ;
   passed = true;
