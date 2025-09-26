@@ -1,0 +1,23 @@
+body{
+    margin:0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: lightblue;
+}
+#game{
+    border: 2px solid black;
+    background: white;
+}
+.controls {
+  margin-top: 10px;
+  font-family: sans-serif;
+  text-align: center;
+  color: #222;
+}
+
+.controls p {
+  margin: 4px ;
+  font-size: 14px;
+}
